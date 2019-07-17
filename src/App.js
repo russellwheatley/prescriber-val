@@ -5,13 +5,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      Prescriber validation
-      </header>
+        <div className="alert alert-primary" role="alert">
+            A simple primary alert—check it out!
+        </div>
     </div>
   );
 }
