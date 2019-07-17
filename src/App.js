@@ -1,15 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter, Route, Link } from "react-router-dom";
+import Prescription from "./views/prescription";
+import Validated from "./views/validated";
+import PrescriptionNumber from "./views/prescriptionNumber";
 
 function App() {
-  return (
-    <div className="App">
-        <div className="alert alert-primary" role="alert">
-            A simple primary alert—check it out!
-        </div>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <React.Fragment>
+                <Route exact path="/" component={PrescriptionNumber} />
+                <Route
+                    path="/prescription/:prescriptionNumber"
+                    component={Prescription}
+                />
+                <Route path="/validated" component={Validated} />
+            </React.Fragment>
+        </BrowserRouter>
+    );
 }
 
 export default App;
