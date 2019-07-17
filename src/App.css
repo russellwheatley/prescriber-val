@@ -9,6 +9,11 @@ html, body, #root{
   align-items:center;
 }
 
-/*.prescription-number div.input-group.mb-3 {*/
-/*width:50%;*/
-/*}*/
+.results-container {
+  display: flex;
+  justify-content: center;
+}
+
+.results-container .expected{
+  width:50%;
+}

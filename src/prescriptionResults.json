@@ -1,0 +1,33 @@
+{
+  "data": {
+    "expected": [
+      {
+        "name": "Vicodin"
+      },
+      {
+        "name": "Simvastatin"
+      },
+      {
+        "name": "Lipitor"
+      },
+      {
+        "name": "Amlodipine"
+      },
+      {
+        "name": "Levothyroxine"
+      },
+      {
+        "name": "paracetamol"
+      },
+      {
+        "name": "Azithromycin"
+      }
+    ],
+    "verified": [
+
+    ],
+    "redundant": [
+
+    ]
+  }
+}

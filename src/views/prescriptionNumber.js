@@ -1,31 +1,26 @@
 import React from "react";
-import { withRouter } from 'react-router-dom';
-
-
-
+import { withRouter } from "react-router-dom";
 
 class PrescriptionNumber extends React.Component {
-    state= { prescriptionNumber:''};
-    pushState = (param)=> {
-        const {history} = this.props;
-        history.push('/validated');
-            console.log('=======');
-            console.log('param', param);
-            console.log('=======');
-
+    state = { prescriptionNumber: "" };
+    pushState = () => {
+        const { history } = this.props;
+        history.push(`/prescription/${this.state.prescriptionNumber}`);
     };
 
-    updatePrescriptionNumber =({target}) => {
-        this.setState({prescriptionNumber:target.value});
+    updatePrescriptionNumber = ({ target }) => {
+        this.setState({ prescriptionNumber: target.value });
     };
 
-    render(){
+    render() {
         return (
             <div className="prescription-number">
                 <div className="jumbotron">
                     <h1 className="display-4">Prescription Validator</h1>
-                    <hr className="my-4"/>
-                    <p className="lead">Please enter your prescription number below:</p>
+                    <hr className="my-4" />
+                    <p className="lead">
+                        Please enter your prescription number below:
+                    </p>
                     <div className="input-group mb-3">
                         <input
                             type="text"
@@ -51,7 +46,6 @@ class PrescriptionNumber extends React.Component {
             </div>
         );
     }
-
 }
 
 export default withRouter(PrescriptionNumber);
