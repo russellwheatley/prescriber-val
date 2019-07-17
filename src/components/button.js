@@ -4,7 +4,7 @@ function ActiveButton({isValid}) {
     const validstyle = isValid ? "btn-primary" : "btn-secondary disabled";
     const validlink = isValid ? "/validated" : "#";
     return (
-      <a href={validlink} className={[validstyle,validlink]} > Approve </a>
+      <a href={validlink} className={validstyle} > Approve </a>
     );
   }
 
