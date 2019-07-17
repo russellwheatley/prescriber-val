@@ -1,8 +1,10 @@
 cont isValid = //Something??
 
-function ActiveButton(props) {
+function ActiveButton({isValid}) {
+    const validstyle = isValid ? "btn-primary" : "btn-secondary disabled";
+    const validlink = isValid ? "/validated" : "#";
     return (
-      <a className='btn {isValid ? "btn-primary" : "btn-secondary"}' {isValid ? 'href="./something"' : 'href="./something"' }> Approve </a>
+      <a href={validlink} className={[validstyle,validlink]} > Approve </a>
     );
   }
 
