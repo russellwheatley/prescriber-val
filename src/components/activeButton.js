@@ -11,7 +11,7 @@ function ActiveButton({ isValid, history }) {
             className={[validstyle]}
         >
             {" "}
-           {isValid ? 'APPROVED': 'NOT APPROVED'}
+            {isValid ? "APPROVED" : "NOT APPROVED"}
         </button>
     );
 }

@@ -3,23 +3,18 @@ import { withRouter } from "react-router-dom";
 import api from "../api";
 
 class PrescriptionNumber extends React.Component {
-    state = { prescriptionNumber: "" , validPrescription: false, message:''};
+    state = { prescriptionNumber: "", validPrescription: false, message: "" };
     pushState = async () => {
         const { history } = this.props;
-        const validPrescription = await api.prescription();
-
-        console.log('=======');
-        console.log(validPrescription);
-        console.log('=======');
-
-
-        if(validPrescription.success){
-        history.push(`/prescription/${this.state.prescriptionNumber}`);
-            this.setState({message: ''})
-        } else {
-            this.setState({message:"This is not a valid prescription number"})
-        }
-
+        api.prescription(this.state.prescriptionNumber)
+            .then(res => {
+                history.push(`/prescription/${this.state.prescriptionNumber}`);
+            })
+            .catch(err => {
+                this.setState({
+                    message: "This is not a valid prescription number"
+                });
+            });
     };
 
     updatePrescriptionNumber = ({ target }) => {
@@ -27,7 +22,7 @@ class PrescriptionNumber extends React.Component {
     };
 
     render() {
-        const { message} = this.state;
+        const { message } = this.state;
         return (
             <React.Fragment>
                 <div className="prescription-number">
@@ -61,14 +56,13 @@ class PrescriptionNumber extends React.Component {
                     </div>
                 </div>
                 <div className="warning-precription-nr">
-                {!!message.length && (
-                    <div className="alert alert-danger" role="alert">
-                        {message}
-                    </div>
-                )}
+                    {!!message.length && (
+                        <div className="alert alert-danger" role="alert">
+                            {message}
+                        </div>
+                    )}
                 </div>
             </React.Fragment>
-
         );
     }
 }

@@ -11,19 +11,24 @@ class Prescription extends React.Component {
     }
 
     results = () => {
-        api.prescription().then(res => {
-            if (res.success) {
+        const { match } = this.props;
+        api.prescription(match.params.prescriptionNumber).then(res => {
+            if (res.data.success) {
                 this.setState({
-                    expected: res.data.expected,
-                    verified: res.data.verified,
-                    redundant: res.data.redundant
+                    expected: res.data.data.expected,
+                    verified: res.data.data.verified,
+                    redundant: res.data.data.redundant
                 });
             }
         });
     };
 
+    removeRefresh = async (prescriptionId, medId) => {
+        await api.deleteRedundant(prescriptionId, medId);
+        this.results();
+    };
+
     render() {
-        const { match } = this.props;
         const { expected, redundant, verified } = this.state;
 
         if (!expected.length && !redundant.length && !verified.length)
@@ -39,6 +44,7 @@ class Prescription extends React.Component {
                                 {expected.map(med => {
                                     return (
                                         <li className="list-group-item list-group-item-primary">
+                                            <img src={`http://10.41.9.77:1111${med.medication.image_link}`}/>
                                             <span>
                                                 {" "}
                                                 <b>NAME:</b>{" "}
@@ -68,6 +74,7 @@ class Prescription extends React.Component {
                                 {verified.map(med => {
                                     return (
                                         <li className="list-group-item list-group-item-success">
+                                            <img src={`http://10.41.9.77:1111${med.medication.image_link}`}/>
                                             <span>
                                                 {" "}
                                                 <b>NAME:</b>{" "}
@@ -98,6 +105,7 @@ class Prescription extends React.Component {
                                     return (
                                         <li className="list-group-item list-group-item-danger">
                                             <div className="medications">
+                                                <img src={`http://10.41.9.77:1111${med.medication.image_link}`}/>
                                                 <span>
                                                     {" "}
                                                     <b>NAME:</b>{" "}
@@ -116,6 +124,7 @@ class Prescription extends React.Component {
                                             <button
                                                 type="button"
                                                 className="btn btn-success"
+                                                onClick={()=> this.removeRefresh(this.props.match.params.prescriptionNumber, med.medication.id)}
                                             >
                                                 remove
                                             </button>

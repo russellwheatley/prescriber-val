@@ -27,7 +27,6 @@ html, body, #root{
 .list-group-item{
   display: flex;
   justify-content: space-around;
-  height:64px;
 }
 
 .medications{
@@ -39,6 +38,10 @@ html, body, #root{
 
 .list-group-item > button {
   margin-left:30px;
+}
+
+.list-group-item img{
+  width:100px;
 }
 
 .approval-container, .scan-results-container{
@@ -66,4 +69,19 @@ html, body, #root{
 .warning-precription-nr{
   display: flex;
   justify-content: center;
+}
+
+.validated{
+  display: flex;
+justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height:70%;
+}
+
+.validated > *{
+  width: 50%;
+}
+.validated > h1{
+  text-align: center;
 }
