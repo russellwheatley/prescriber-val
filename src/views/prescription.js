@@ -5,7 +5,15 @@ import ResultsButton from "../components/resultsButton";
 import io from "socket.io-client";
 
 class Prescription extends React.Component {
-    state = { expected: [], verified: [], redundant: [], name:'', dob:'',address:'', gender:'' };
+    state = {
+        expected: [],
+        verified: [],
+        redundant: [],
+        name: "",
+        dob: "",
+        address: "",
+        gender: ""
+    };
 
     componentDidMount() {
         this.results();
@@ -17,7 +25,7 @@ class Prescription extends React.Component {
                 expected: res.expected,
                 verified: res.verified,
                 redundant: res.redundant
-            })
+            });
         });
     }
 
@@ -29,10 +37,10 @@ class Prescription extends React.Component {
                     expected: res.data.data.expected,
                     verified: res.data.data.verified,
                     redundant: res.data.data.redundant,
-                    name:res.data.data.patient_name,
-                    dob:res.data.data.dob,
-                    gender:res.data.data.gender,
-                    address:res.data.data.address,
+                    name: res.data.data.patient_name,
+                    dob: res.data.data.dob,
+                    gender: res.data.data.gender,
+                    address: res.data.data.address
                 });
             }
         });
@@ -44,7 +52,15 @@ class Prescription extends React.Component {
     };
 
     render() {
-        const { expected, redundant, verified,name, dob,address, gender } = this.state;
+        const {
+            expected,
+            redundant,
+            verified,
+            name,
+            dob,
+            address,
+            gender
+        } = this.state;
 
         if (!expected.length && !redundant.length && !verified.length)
             return null;
@@ -52,30 +68,32 @@ class Prescription extends React.Component {
         return (
             <div className="prescription">
                 <div className="table-container">
-                <table className="table table-hover">
-                    <tbody>
-                    <tr>
-                        <th scope="row">Patient Name:</th>
-                        <td>{name}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Prescription Number:</th>
-                        <td>{this.props.match.params.prescriptionNumber}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Date Of Birth:</th>
-                        <td>{dob}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Gender:</th>
-                        <td>{gender}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Address:</th>
-                        <td>{address}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <table className="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Patient Name:</th>
+                                <td>{name}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Prescription Number:</th>
+                                <td>
+                                    {this.props.match.params.prescriptionNumber}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Date Of Birth:</th>
+                                <td>{dob}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Gender:</th>
+                                <td>{gender}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Address:</th>
+                                <td>{address}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 {!!expected.length && (

@@ -4,13 +4,23 @@ import { withRouter } from "react-router-dom";
 function Validated({ history }) {
     return (
         <div className="validated">
-            <h1>You've now validated the medication</h1>
-            <button
-                className="btn btn-primary btn-lg btn-block"
-                onClick={() => history.push("/")}
-            >
-                New Prescription
-            </button>
+            <div className="validated-container jumbotron">
+                <div className="validated-contents text-center">
+                    <h1 className="text-success display-4">Approved!</h1>
+                    <hr className="hr-4"></hr>
+                    <h5 className="text-body">
+                        {" "}
+                        The prescription can now be passed on to the Pharmacist{" "}
+                    </h5>
+                    <br />
+                    <button
+                        onClick={() => history.push("/")}
+                        className="btn btn-primary text-white"
+                    >
+                        New prescription
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
