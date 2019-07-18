@@ -2,12 +2,17 @@ import React from "react";
 import api from "../api";
 import ActiveButton from "../components/activeButton";
 import ResultsButton from "../components/resultsButton";
+import io from "socket.io-client";
 
 class Prescription extends React.Component {
     state = { expected: [], verified: [], redundant: [] };
 
     componentDidMount() {
         this.results();
+        const socket = io("http://10.41.9.77:1111");
+        socket.on("connection", function(socket) {
+            console.log("a user connected");
+        });
     }
 
     results = () => {
@@ -44,7 +49,9 @@ class Prescription extends React.Component {
                                 {expected.map(med => {
                                     return (
                                         <li className="list-group-item list-group-item-primary">
-                                            <img src={`http://10.41.9.77:1111${med.medication.image_link}`}/>
+                                            <img
+                                                src={`http://10.41.9.77:1111${med.medication.image_link}`}
+                                            />
                                             <span>
                                                 {" "}
                                                 <b>NAME:</b>{" "}
@@ -74,7 +81,9 @@ class Prescription extends React.Component {
                                 {verified.map(med => {
                                     return (
                                         <li className="list-group-item list-group-item-success">
-                                            <img src={`http://10.41.9.77:1111${med.medication.image_link}`}/>
+                                            <img
+                                                src={`http://10.41.9.77:1111${med.medication.image_link}`}
+                                            />
                                             <span>
                                                 {" "}
                                                 <b>NAME:</b>{" "}
@@ -105,7 +114,9 @@ class Prescription extends React.Component {
                                     return (
                                         <li className="list-group-item list-group-item-danger">
                                             <div className="medications">
-                                                <img src={`http://10.41.9.77:1111${med.medication.image_link}`}/>
+                                                <img
+                                                    src={`http://10.41.9.77:1111${med.medication.image_link}`}
+                                                />
                                                 <span>
                                                     {" "}
                                                     <b>NAME:</b>{" "}
@@ -124,7 +135,13 @@ class Prescription extends React.Component {
                                             <button
                                                 type="button"
                                                 className="btn btn-success"
-                                                onClick={()=> this.removeRefresh(this.props.match.params.prescriptionNumber, med.medication.id)}
+                                                onClick={() =>
+                                                    this.removeRefresh(
+                                                        this.props.match.params
+                                                            .prescriptionNumber,
+                                                        med.medication.id
+                                                    )
+                                                }
                                             >
                                                 remove
                                             </button>

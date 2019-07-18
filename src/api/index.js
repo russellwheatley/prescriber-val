@@ -18,7 +18,8 @@ const api = {
     deleteRedundant: (prescriptionId, medId) =>
         axios.delete(
             `${BASE_URL}/api/v1/prescription/${prescriptionId}/${medId}`
-        )
+        ),
+    cleanUp: () => axios.get(`${BASE_URL}/api/v1/cleanup`)
 };
 
 export default api;

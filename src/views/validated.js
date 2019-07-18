@@ -16,4 +16,3 @@ function Validated({ history }) {
 }
 
 export default withRouter(Validated);
-

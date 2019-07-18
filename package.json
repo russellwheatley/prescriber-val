@@ -10,7 +10,8 @@
     "react-dom": "^16.8.6",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "socket.io-client": "^2.2.0"
   },
   "scripts": {
     "start": "API_ENV=product react-scripts start",

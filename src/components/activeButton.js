@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import api from "../api";
 
 function ActiveButton({ isValid, history }) {
     const validstyle = isValid
@@ -7,7 +8,10 @@ function ActiveButton({ isValid, history }) {
         : "btn btn-secondary btn-lg btn-block disabled";
     return (
         <button
-            onClick={() => history.push("/validated")}
+            onClick={async () => {
+                await api.cleanUp();
+                history.push("/validated");
+            }}
             className={[validstyle]}
         >
             {" "}
