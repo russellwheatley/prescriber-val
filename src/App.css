@@ -67,3 +67,15 @@ html, body, #root{
   display: flex;
   justify-content: center;
 }
+
+.validated-container{
+  width: 50%;
+  margin:auto;
+  margin-top:30px;
+}
+
+.validated-contents{
+  align-items:center;
+  justify-items:center;
+  padding:5%;
+}
