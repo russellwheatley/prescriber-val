@@ -2,18 +2,68 @@ html, body, #root{
   height:100%;
 }
 
+.prescription h1{
+  text-align: center;
+}
+
 .prescription-number {
-  height:100%;
+  margin-top:30px;
   display: flex;
   justify-content:center;
   align-items:center;
 }
 
-.results-container {
+.prescription-container {
+  display: flex;
+  justify-content: center;
+  margin:30px 0;
+}
+
+.prescription-container .expected,.verified,.redundant{
+  width:50%;
+}
+
+
+.list-group-item{
+  display: flex;
+  justify-content: space-around;
+  height:64px;
+}
+
+.medications{
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+}
+
+
+.list-group-item > button {
+  margin-left:30px;
+}
+
+.approval-container, .scan-results-container{
   display: flex;
   justify-content: center;
 }
 
-.results-container .expected{
-  width:50%;
+.scan-results-container{
+  margin-bottom: 30px;
+}
+
+.scan-results-container > button{
+  width: 50%;
+}
+
+.approval-container > button{
+  width: 50%;
+}
+
+
+.disabled{
+  pointer-events: none;
+}
+
+.warning-precription-nr{
+  display: flex;
+  justify-content: center;
 }

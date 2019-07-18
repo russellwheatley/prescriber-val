@@ -1,22 +1,73 @@
 {
-  "data": [
-    {
-      "name": "Vicodin"
-    },
-    {
-      "name": "Simvastatin"
-    },
-    {
-      "name": "Levothyroxine"
-    },
-    {
-      "name": "Azithromycin"
-    },
-    {
-      "name": "Lipitor"
-    },
-    {
-      "name": "Amlodipine"
+  "success": true,
+  "data": {
+      "expected": [
+        {
+          "medication": {
+            "id": 3,
+            "name": "med c",
+            "quantity": 5,
+            "strength": "15 ml",
+            "imge_link": "/resources/test.png"
+          }
+        }
+      ],
+      "verified": [
+        {
+          "medication": {
+            "id": 11,
+            "name": "med a",
+            "barcode": "111",
+            "strength": "10 ml",
+            "quantity": 12,
+            "formulation": null,
+            "image_link": "/resources/test.png"
+          }
+        }
+      ],
+      "redundant": [
+        {
+          "medication": {
+            "id": 22,
+            "name": "med b",
+            "barcode": "222",
+            "strength": "15 mg",
+            "quantity": 3,
+            "formulation": null,
+            "image_link": "/resources/test.png"
+          },
+          "quantity": {
+            "quantity_error": true,
+            "med_quantity": 3,
+            "pres_quantity": 4
+          },
+          "strength": {
+            "strength_error": true,
+            "med_strength": "15 mg",
+            "pres_strength": "15 ml"
+          }
+        },
+        {
+          "medication": {
+            "id": 44,
+            "name": "med d",
+            "barcode": "444",
+            "strength": "20 ml",
+            "quantity": 10,
+            "formulation": null,
+            "image_link": "/resources/test.png"
+          },
+          "quantity": {
+            "quantity_error": false,
+            "med_quantity": 0,
+            "pres_quantity": 0
+          },
+          "strength": {
+            "strength_error": false,
+            "med_strength": "",
+            "pres_strength": ""
+          }
+        }
+      ]
     }
-  ]
 }

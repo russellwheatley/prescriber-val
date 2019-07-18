@@ -21,3 +21,10 @@ function App() {
 }
 
 export default App;
+
+//todo validate prescription nr, if success false. show error message
+//todo display results on prescription page
+//todo create a results button to be pressed when you want to see outcome of scan
+//todo send prescripton number to scanner app
+//todo send delete redundant meds req to server
+//todo hook up approve button to validation

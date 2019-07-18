@@ -1,40 +1,142 @@
 import React from "react";
-import api from '../api';
+import api from "../api";
+import ActiveButton from "../components/activeButton";
+import ResultsButton from "../components/resultsButton";
 
 class Prescription extends React.Component {
-    state={prescription:[]};
+    state = { expected: [], verified: [], redundant: [] };
 
-    componentDidMount(){
-        api.prescription().then((res)=> {
-            this.setState({prescription:res.data});
-        })
+    componentDidMount() {
+        this.results();
     }
 
-    render(){
-        const { match } = this.props;
-        const { prescription} = this.state;
+    results = () => {
+        api.prescription().then(res => {
+            if (res.success) {
+                this.setState({
+                    expected: res.data.expected,
+                    verified: res.data.verified,
+                    redundant: res.data.redundant
+                });
+            }
+        });
+    };
 
-        if(!prescription.length) return null;
+    render() {
+        const { match } = this.props;
+        const { expected, redundant, verified } = this.state;
+
+        if (!expected.length && !redundant.length && !verified.length)
+            return null;
 
         return (
             <div className="prescription">
-                prescription number: {match.params.prescriptionNumber}
-                <div className="results-container">
-                <ul className="list-group expected">
-                    {prescription.map((med) => {
-                        return(
-                            <li className="list-group-item list-group-item-primary">
-                                {med.name}
-                            </li>
-                        )
-                    })}
-
-                </ul>
+                {!!expected.length && (
+                    <React.Fragment>
+                        <h1>Expected Medication</h1>
+                        <div className="prescription-container">
+                            <ul className="list-group expected">
+                                {expected.map(med => {
+                                    return (
+                                        <li className="list-group-item list-group-item-primary">
+                                            <span>
+                                                {" "}
+                                                <b>NAME:</b>{" "}
+                                                {med.medication.name}
+                                            </span>
+                                            <span>
+                                                {" "}
+                                                <b>STRENGTH:</b>{" "}
+                                                {med.medication.strength}
+                                            </span>
+                                            <span>
+                                                <b>QUANTITY:</b>{" "}
+                                                {med.medication.quantity}
+                                            </span>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    </React.Fragment>
+                )}
+                {!!verified.length && (
+                    <React.Fragment>
+                        <h1>Verified Medication</h1>
+                        <div className="prescription-container">
+                            <ul className="list-group verified">
+                                {verified.map(med => {
+                                    return (
+                                        <li className="list-group-item list-group-item-success">
+                                            <span>
+                                                {" "}
+                                                <b>NAME:</b>{" "}
+                                                {med.medication.name}
+                                            </span>
+                                            <span>
+                                                {" "}
+                                                <b>STRENGTH:</b>{" "}
+                                                {med.medication.strength}
+                                            </span>
+                                            <span>
+                                                <b>QUANTITY:</b>{" "}
+                                                {med.medication.quantity}
+                                            </span>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    </React.Fragment>
+                )}
+                {!!redundant.length && (
+                    <React.Fragment>
+                        <h1>Incorrectly Scanned Medication</h1>
+                        <div className="prescription-container">
+                            <ul className="list-group redundant">
+                                {redundant.map(med => {
+                                    return (
+                                        <li className="list-group-item list-group-item-danger">
+                                            <div className="medications">
+                                                <span>
+                                                    {" "}
+                                                    <b>NAME:</b>{" "}
+                                                    {med.medication.name}
+                                                </span>
+                                                <span>
+                                                    {" "}
+                                                    <b>STRENGTH:</b>{" "}
+                                                    {med.medication.strength}
+                                                </span>
+                                                <span>
+                                                    <b>QUANTITY:</b>{" "}
+                                                    {med.medication.quantity}
+                                                </span>
+                                            </div>
+                                            <button
+                                                type="button"
+                                                className="btn btn-success"
+                                            >
+                                                remove
+                                            </button>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    </React.Fragment>
+                )}
+                <div className="scan-results-container">
+                    <ResultsButton refresh={this.results} />
+                </div>
+                <div className="approval-container">
+                    <ActiveButton
+                        isValid={!expected.length && !redundant.length}
+                    />
                 </div>
             </div>
         );
     }
-
 }
 
 export default Prescription;
