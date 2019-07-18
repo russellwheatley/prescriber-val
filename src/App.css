@@ -68,8 +68,11 @@ html, body, #root{
   justify-content: center;
 }
 
+.validated{
+  display:flex;
+}
+
 .validated-container{
-  width: 50%;
   margin:auto;
   margin-top:30px;
 }
@@ -77,5 +80,4 @@ html, body, #root{
 .validated-contents{
   align-items:center;
   justify-items:center;
-  padding:5%;
 }
