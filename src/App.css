@@ -82,7 +82,18 @@ justify-content: center;
 .validated > *{
   width: 50%;
 }
-.validated > h1{
+.validated > h1,h2,h3{
   text-align: center;
 
 }
+
+.table-container{
+  margin-top:50px;
+  display: flex;
+  justify-content: center;
+}
+
+.table-container > table{
+  width: 50%;
+}
+

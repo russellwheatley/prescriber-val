@@ -1,17 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import api from "../api";
-import io from "socket.io-client";
 
 class PrescriptionNumber extends React.Component {
     state = { prescriptionNumber: "", validPrescription: false, message: "" };
-
-    componentDidMount() {
-        const socket = io("http://10.41.9.77:1111");
-        socket.on("connection", function(socket) {
-            console.log("a user connected");
-        });
-    }
 
     pushState = async () => {
         const { history } = this.props;

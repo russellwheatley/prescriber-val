@@ -5,13 +5,19 @@ import ResultsButton from "../components/resultsButton";
 import io from "socket.io-client";
 
 class Prescription extends React.Component {
-    state = { expected: [], verified: [], redundant: [] };
+    state = { expected: [], verified: [], redundant: [], name:'', dob:'',address:'', gender:'' };
 
     componentDidMount() {
         this.results();
         const socket = io("http://10.41.9.77:1111");
-        socket.on("connection", function(socket) {
-            console.log("a user connected");
+        socket.on("connect", function(sock) {});
+        const that = this;
+        socket.on("med_scanned", function(res) {
+            that.setState({
+                expected: res.expected,
+                verified: res.verified,
+                redundant: res.redundant
+            })
         });
     }
 
@@ -22,7 +28,11 @@ class Prescription extends React.Component {
                 this.setState({
                     expected: res.data.data.expected,
                     verified: res.data.data.verified,
-                    redundant: res.data.data.redundant
+                    redundant: res.data.data.redundant,
+                    name:res.data.data.patient_name,
+                    dob:res.data.data.dob,
+                    gender:res.data.data.gender,
+                    address:res.data.data.address,
                 });
             }
         });
@@ -34,16 +44,43 @@ class Prescription extends React.Component {
     };
 
     render() {
-        const { expected, redundant, verified } = this.state;
+        const { expected, redundant, verified,name, dob,address, gender } = this.state;
 
         if (!expected.length && !redundant.length && !verified.length)
             return null;
 
         return (
             <div className="prescription">
+                <div className="table-container">
+                <table className="table table-hover">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Patient Name:</th>
+                        <td>{name}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Prescription Number:</th>
+                        <td>{this.props.match.params.prescriptionNumber}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Date Of Birth:</th>
+                        <td>{dob}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Gender:</th>
+                        <td>{gender}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Address:</th>
+                        <td>{address}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+
                 {!!expected.length && (
                     <React.Fragment>
-                        <h1>Expected Medication</h1>
+                        <h2>Expected Medication</h2>
                         <div className="prescription-container">
                             <ul className="list-group expected">
                                 {expected.map(med => {
@@ -75,7 +112,7 @@ class Prescription extends React.Component {
                 )}
                 {!!verified.length && (
                     <React.Fragment>
-                        <h1>Verified Medication</h1>
+                        <h2>Verified Medication</h2>
                         <div className="prescription-container">
                             <ul className="list-group verified">
                                 {verified.map(med => {
@@ -107,7 +144,7 @@ class Prescription extends React.Component {
                 )}
                 {!!redundant.length && (
                     <React.Fragment>
-                        <h1>Incorrectly Scanned Medication</h1>
+                        <h2>Incorrectly Scanned Medication</h2>
                         <div className="prescription-container">
                             <ul className="list-group redundant">
                                 {redundant.map(med => {
